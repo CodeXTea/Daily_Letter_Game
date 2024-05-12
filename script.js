@@ -89,6 +89,7 @@ function backToUsername() {
         alert("Hanya Developer yang dapat menggunakan tombol ini.");
     }
 }
+
 window.onload = function() {
     let savedGameData = localStorage.getItem("gameData");
     if (savedGameData) {
@@ -110,6 +111,7 @@ window.onload = function() {
         document.getElementById("save-button").style.display = "block";
     }
 };
+
 // Menambahkan nama pengguna ke dalam data permainan saat nama pengguna disubmit
 function startGame() {
     let username = document.getElementById("username-input").value.trim();
@@ -130,24 +132,33 @@ function startGame() {
 
 // Fungsi untuk menampilkan atau menyembunyikan menu pengembang
 function togglePlayersMenu() {
-    let playersMenu = document.getElementById("players-menu");
-    if (playersMenu.style.display === "none") {
+    let password = prompt("Masukkan kata sandi developer:");
+    if (password === "Java_Teams") { // Ganti "Java_Teams" dengan kata sandi yang diinginkan
+        let playersMenu = document.getElementById("players-menu");
         playersMenu.style.display = "block";
         displayPlayers(); // Menampilkan daftar nama pengguna
-    } else {
-        playersMenu.style.display = "none";
+     } else {
+        let isDeveloper = confirm("Apakah Anda seorang developer?");
+        if (isDeveloper) {
+            let password = prompt("Masukkan kata sandi developer:");
+            if (password === "Java_Teams") {
+                playersMenu.style.display = "block";
+                displayPlayers();
+                document.getElementById("hide-players-button").style.display = "block";
+            } else {
+                alert("Kata sandi developer salah. Akses ditolak.");
+            }
+        }
     }
 }
-// Fungsi untuk memeriksa kata sandi sebelum menampilkan daftar nama pengguna
-function checkPassword() {
-    let password = document.getElementById("password-input").value.trim();
-    // Periksa apakah kata sandi sesuai dengan yang diinginkan
-    if (password === "Java_Teams") { // Ganti "kata_sandi_anda" dengan kata sandi yang diinginkan
-        displayPlayers();
-    } else {
-        alert("Kata sandi salah. Akses ditolak.");
-    }
+
+// Fungsi untuk menyembunyikan daftar nama pengguna
+function hidePlayersList() {
+    let playersMenu = document.getElementById("players-menu");
+    playersMenu.style.display = "none";
+    document.getElementById("hide-players-button").style.display = "none";
 }
+
 // Fungsi untuk menampilkan daftar nama pengguna
 function displayPlayers() {
     let playersList = document.getElementById("players-list");
@@ -172,5 +183,5 @@ function displayPlayers() {
     }
     // Ubah properti display menjadi block setelah kata sandi divalidasi
     playersList.style.display = "block";
-}
-
+                    }
+            
