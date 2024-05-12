@@ -79,17 +79,6 @@ function saveGame() {
     document.getElementById("save-button").style.display = "none";
 }
 
-function startGame() {
-    let username = document.getElementById("username-input").value.trim();
-    if (!username) {
-        alert("Sila isi nama pengguna terlebih dahulu.");
-        return;
-    }
-    document.getElementById("username-form").style.display = "none";
-    document.getElementById("user-info").style.display = "block";
-    document.getElementById("usernameDisplay").innerText = "Welcome, " + username + "!";
-}
-
 function backToUsername() {
     let backButton = document.getElementById("backToUsername");
     if (backButton.hasAttribute("data-developer")) {
@@ -121,36 +110,55 @@ window.onload = function() {
         document.getElementById("save-button").style.display = "block";
     }
 };
+// Menambahkan nama pengguna ke dalam data permainan saat nama pengguna disubmit
+function startGame() {
+    let username = document.getElementById("username-input").value.trim();
+    if (!username) {
+        alert("Sila isi nama pengguna terlebih dahulu.");
+        return;
+    }
+    let gameData = {
+        username: username,
+        letters: [],
+        players: [username] // Menambahkan nama pengguna ke dalam data permainan
+    };
+    localStorage.setItem("gameData", JSON.stringify(gameData));
+    document.getElementById("username-form").style.display = "none";
+    document.getElementById("user-info").style.display = "block";
+    document.getElementById("usernameDisplay").innerText = "Welcome, " + username + "!";
+}
 
+// Fungsi untuk menampilkan atau menyembunyikan menu pengembang
 function togglePlayersMenu() {
     let playersMenu = document.getElementById("players-menu");
     if (playersMenu.style.display === "none") {
         playersMenu.style.display = "block";
+        displayPlayers(); // Menampilkan daftar nama pengguna
     } else {
         playersMenu.style.display = "none";
     }
 }
-
+// Fungsi untuk memeriksa kata sandi sebelum menampilkan daftar nama pengguna
 function checkPassword() {
     let password = document.getElementById("password-input").value.trim();
     // Periksa apakah kata sandi sesuai dengan yang diinginkan
-    if (password === "Java_Teams") {
+    if (password === "Java_Teams") { // Ganti "kata_sandi_anda" dengan kata sandi yang diinginkan
         displayPlayers();
     } else {
         alert("Kata sandi salah. Akses ditolak.");
     }
 }
-
+// Fungsi untuk menampilkan daftar nama pengguna
 function displayPlayers() {
     let playersList = document.getElementById("players-list");
     playersList.innerHTML = "";
-    // Ambil data pengguna dari localStorage
     let savedGameData = localStorage.getItem("gameData");
     if (savedGameData) {
         let gameData = JSON.parse(savedGameData);
         let players = gameData.players;
         if (players && players.length > 0) {
-            // Tampilkan nama-nama pengguna yang sudah dimasukkan sebelumnya
+            // Urutkan daftar nama pengguna secara alfabetis
+            players.sort();
             players.forEach(player => {
                 let playerDiv = document.createElement("div");
                 playerDiv.textContent = player;
@@ -162,4 +170,7 @@ function displayPlayers() {
     } else {
         playersList.textContent = "Belum ada nama pengguna yang tersimpan.";
     }
+    // Ubah properti display menjadi block setelah kata sandi divalidasi
+    playersList.style.display = "block";
 }
+
