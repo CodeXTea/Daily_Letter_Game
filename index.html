@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en">
+<!doctype html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,19 +63,24 @@
             <button id="save-button" onclick="saveGame()" style="display: none">
                 Simpan Permainan
             </button>
-
+            <!-- Menu pengembang -->
             <div id="menu-container">
-                <button class="btn"id="show-players-button" onclick="togglePlayersMenu()">
-                    Menu Devolopers
+                <button
+                    class="btn"
+                    id="show-players-button"
+                    onclick="togglePlayersMenu()"
+                >
+                    Menu Developers
                 </button>
                 <div id="players-menu" style="display: none">
                     <input
                         type="password"
                         id="password-input"
-                        placeholder="Masukkan kata sandi"
+                        placeholder="Enter password"
                     />
                     <button onclick="checkPassword()">Submit</button>
-                    <div id="players-list"></div>
+                    <!-- Set display: none explicitly to hide the player list initially -->
+                    <div id="players-list" style="display: none"></div>
                 </div>
             </div>
         </div>
@@ -81,3 +88,92 @@
         <script src="script.js"></script>
     </body>
 </html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Daily Letter Game</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="username-form">
+            <div id="usernameInputContainer">
+                <div class="frame" id="usernameFrame">
+                    <h1>Welcome to Daily Letter Game</h1>
+                    <p>Please enter your name:</p>
+                    <input
+                        type="text"
+                        id="username-input"
+                        placeholder="Your name"
+                    />
+                    <button onclick="startGame()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="user-info" style="display: none">
+            <h2 id="usernameDisplay"></h2>
+            <div class="frame">
+                <h1>Daily Letter Game</h1>
+                <div class="input-container">
+                    <input
+                        type="text"
+                        id="input-letter"
+                        maxlength="1"
+                        placeholder="Enter a letter"
+                    />
+                    <button onclick="addLetter()">Submit</button>
+                    <button
+                        id="backToUsername"
+                        data-developer
+                        onclick="backToUsername()"
+                    >
+                        Back to Username
+                    </button>
+                </div>
+            </div>
+            <div class="letters-container">
+                <ul id="letters-display"></ul>
+            </div>
+            <div id="username-form">
+                <!-- Formulir untuk memasukkan nama pengguna -->
+            </div>
+
+            <div id="user-info" style="display: none">
+                <!-- Informasi pengguna -->
+            </div>
+
+            <div class="letters-container">
+                <!-- Container untuk menampilkan huruf-huruf -->
+            </div>
+
+            <button id="save-button" onclick="saveGame()" style="display: none">
+                Simpan Permainan
+            </button>
+            <!-- Menu pengembang -->
+            <div id="menu-container">
+                <button
+                    class="btn"
+                    id="show-players-button"
+                    onclick="togglePlayersMenu()"
+                >
+                    Menu Developers
+                </button>
+                <div id="players-menu" style="display: none">
+                    <input
+                        type="password"
+                        id="password-input"
+                        placeholder="Enter password"
+                    />
+                    <button onclick="checkPassword()">Submit</button>
+                    <!-- Set display: none explicitly to hide the player list initially -->
+                    <div id="players-list" style="display: none"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+    </html>
+    
